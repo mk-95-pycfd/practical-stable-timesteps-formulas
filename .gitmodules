@@ -1,0 +1,3 @@
+[submodule "integrators"]
+	path = integrators
+	url = https://github.com/mk-95-pycfd/integrators
