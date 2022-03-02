@@ -50,8 +50,8 @@ ax.loglog(Reh, Courant, color=colors[1], linewidth=1.5, marker=markers[0], marke
 # outer_bound = lambda Pe: 3.0/2/np.sqrt(3)*np.ones_like(Pe)
 
 ## plot the unified stability formulation boundaries
-inner_bound = lambda Pe: 1.88*Pe
-outer_bound = lambda Pe: 1.69+1.08*Pe**(-1/2)
+inner_bound = lambda Pe: 1.256*Pe
+outer_bound = lambda Pe: 1.71+1.29*Pe**(-0.53)
 
 ax.loglog(Reh, inner_bound(Reh),'--',color=colors[2],linewidth=1.5,label="Inner Bound")
 ax.loglog(Reh, outer_bound(Reh),'-.',color=colors[3],linewidth=1.5,label="Outer Bound")
