@@ -31,24 +31,35 @@ markers = ['o', 's', 'D', 'v','*']
 
 # load data
 stability_data = np.loadtxt('./RK2-heun-stability.txt',delimiter=",",usecols=[0,1])
-#convert data
-stability_paper = stability_data/np.sqrt(2)
+#convert data to match the main results section
+# stability_paper = stability_data/np.sqrt(2)
+
+#convert data to match the unified formulation section
+stability_paper = stability_data*1
+# Reh conversion
+stability_paper[:,1] = stability_data[:,1]/np.sqrt(2)/2
+# Courant conversion
+stability_paper[:,0] = stability_data[:,0]*np.sqrt(2)
 
 #plot
 Reh = stability_paper[2:,1]
 Courant = stability_paper[2:,0]
 ax.loglog(Reh, Courant, color=colors[1], linewidth=1.5, marker=markers[0], markersize=4.5, label="RK2 Taylor Vortex")
-# plot the analytical stability boundaries
-lower_bound = lambda Pe: Pe/4.0
-upper_bound = lambda Pe: 2.38/2/Pe**(1/3)
+# # plot the analytical stability boundaries
+# lower_bound = lambda Pe: Pe/4.0
+# upper_bound = lambda Pe: 2.38/2/Pe**(1/3)
 
-ax.loglog(Reh, lower_bound(Reh),'--',color=colors[2],linewidth=1.5,label="Lower Bound")
-ax.loglog(Reh, upper_bound(Reh),'-.',color=colors[3],linewidth=1.5,label="Upper Bound")
+## plot the unified stability formulation boundaries
+inner_bound = lambda Pe: 1.5*Pe
+outer_bound = lambda Pe: 1.73*Pe**(-0.34)
+
+ax.loglog(Reh, inner_bound(Reh),'--',color=colors[2],linewidth=1.5,label="Inner Bound")
+ax.loglog(Reh, outer_bound(Reh),'-.',color=colors[3],linewidth=1.5,label="Outer Bound")
 
 ax.set_ylabel('Courant', fontsize=12)
 ax.set_xlabel('Cell Reynolds Number', fontsize=12)
 
-ax.set_ylim([4e-2,2])
+# ax.set_ylim([4e-2,2])
 plt.legend(ncol=1,loc='lower right',fontsize=10,frameon=False)
 
 plt.tight_layout()
