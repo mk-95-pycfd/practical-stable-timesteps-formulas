@@ -46,8 +46,8 @@ Reh = stability_paper[2:,1]
 Courant = stability_paper[2:,0]
 ax.loglog(Reh, Courant, color=colors[1], linewidth=1.5, marker=markers[0], markersize=4.5, label="RK2 Taylor Vortex")
 # # plot the analytical stability boundaries
-# lower_bound = lambda Pe: Pe/4.0
-# upper_bound = lambda Pe: 2.38/2/Pe**(1/3)
+# inner_bound = lambda Pe: Pe/4.0
+# outer_bound = lambda Pe: 2.38/2/Pe**(1/3)
 
 ## plot the unified stability formulation boundaries
 inner_bound = lambda Pe: 1.5*Pe
